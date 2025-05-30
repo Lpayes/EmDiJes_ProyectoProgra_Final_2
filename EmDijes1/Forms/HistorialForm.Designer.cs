@@ -39,6 +39,7 @@
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
+            buttonVerResumen2 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -52,10 +53,10 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(166, 282);
+            dataGridView1.Location = new Point(330, 282);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(469, 87);
+            dataGridView1.Size = new Size(305, 87);
             dataGridView1.TabIndex = 1;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -137,13 +138,25 @@
             label4.TabIndex = 10;
             label4.Text = "Sigue a Jesus";
             // 
+            // buttonVerResumen2
+            // 
+            buttonVerResumen2.BackColor = SystemColors.GradientActiveCaption;
+            buttonVerResumen2.Location = new Point(161, 282);
+            buttonVerResumen2.Name = "buttonVerResumen2";
+            buttonVerResumen2.Size = new Size(127, 76);
+            buttonVerResumen2.TabIndex = 11;
+            buttonVerResumen2.Text = "Ver Resumen po Id";
+            buttonVerResumen2.UseVisualStyleBackColor = false;
+            buttonVerResumen2.Click += buttonVerResumen2_Click;
+            // 
             // HistorialForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(810, 450);
+            Controls.Add(buttonVerResumen2);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -173,5 +186,6 @@
         private Label label2;
         private Label label3;
         private Label label4;
+        private Button buttonVerResumen2;
     }
 }

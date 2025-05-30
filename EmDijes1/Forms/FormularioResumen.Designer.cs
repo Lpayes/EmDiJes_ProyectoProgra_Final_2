@@ -46,8 +46,11 @@
             textBoxCanciones = new TextBox();
             buttonBuscarEnYouTube = new Button();
             panel1 = new Panel();
+            panel2 = new Panel();
+            Enlace = new Label();
             ((System.ComponentModel.ISupportInitialize)webViewVideo).BeginInit();
             panel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // labelTitulo
@@ -85,7 +88,7 @@
             // 
             labelReflexion.AutoSize = true;
             labelReflexion.Font = new Font("Showcard Gothic", 9F, FontStyle.Bold);
-            labelReflexion.Location = new Point(452, 125);
+            labelReflexion.Location = new Point(414, 125);
             labelReflexion.Name = "labelReflexion";
             labelReflexion.Size = new Size(196, 18);
             labelReflexion.TabIndex = 3;
@@ -105,30 +108,32 @@
             // 
             labelOracion.AutoSize = true;
             labelOracion.Font = new Font("Showcard Gothic", 9F, FontStyle.Bold);
-            labelOracion.Location = new Point(415, 504);
+            labelOracion.Location = new Point(452, 489);
             labelOracion.Name = "labelOracion";
-            labelOracion.Size = new Size(165, 18);
+            labelOracion.Size = new Size(80, 18);
             labelOracion.TabIndex = 5;
-            labelOracion.Text = "Versículo del día";
+            labelOracion.Text = "Oración";
             // 
             // buttonCerrar
             // 
-            buttonCerrar.Location = new Point(672, 148);
+            buttonCerrar.BackColor = SystemColors.ActiveCaption;
+            buttonCerrar.Location = new Point(57, 536);
             buttonCerrar.Name = "buttonCerrar";
-            buttonCerrar.Size = new Size(146, 71);
+            buttonCerrar.Size = new Size(118, 54);
             buttonCerrar.TabIndex = 9;
             buttonCerrar.Text = "Cerrar";
-            buttonCerrar.UseVisualStyleBackColor = true;
+            buttonCerrar.UseVisualStyleBackColor = false;
             // 
             // labelEmocion
             // 
             labelEmocion.AutoSize = true;
             labelEmocion.Font = new Font("Showcard Gothic", 9F, FontStyle.Bold);
-            labelEmocion.Location = new Point(296, 74);
+            labelEmocion.Location = new Point(250, 69);
             labelEmocion.Name = "labelEmocion";
             labelEmocion.Size = new Size(83, 18);
             labelEmocion.TabIndex = 10;
             labelEmocion.Text = "Emoción";
+            labelEmocion.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textBoxReflexion
             // 
@@ -165,19 +170,21 @@
             // 
             // textBoxEnlaceVideo
             // 
-            textBoxEnlaceVideo.Location = new Point(127, 364);
+            textBoxEnlaceVideo.BackColor = SystemColors.Highlight;
+            textBoxEnlaceVideo.Location = new Point(27, 347);
             textBoxEnlaceVideo.Name = "textBoxEnlaceVideo";
-            textBoxEnlaceVideo.Size = new Size(308, 27);
+            textBoxEnlaceVideo.Size = new Size(182, 27);
             textBoxEnlaceVideo.TabIndex = 15;
             // 
             // buttonVerVideo
             // 
-            buttonVerVideo.Location = new Point(303, 434);
+            buttonVerVideo.BackColor = SystemColors.GradientActiveCaption;
+            buttonVerVideo.Location = new Point(57, 462);
             buttonVerVideo.Name = "buttonVerVideo";
-            buttonVerVideo.Size = new Size(118, 73);
+            buttonVerVideo.Size = new Size(118, 60);
             buttonVerVideo.TabIndex = 16;
             buttonVerVideo.Text = "Play";
-            buttonVerVideo.UseVisualStyleBackColor = true;
+            buttonVerVideo.UseVisualStyleBackColor = false;
             // 
             // webViewVideo
             // 
@@ -192,35 +199,55 @@
             // 
             // textBoxCanciones
             // 
-            textBoxCanciones.Location = new Point(49, 536);
+            textBoxCanciones.Location = new Point(0, 637);
             textBoxCanciones.Multiline = true;
             textBoxCanciones.Name = "textBoxCanciones";
             textBoxCanciones.ReadOnly = true;
             textBoxCanciones.ScrollBars = ScrollBars.Both;
-            textBoxCanciones.Size = new Size(481, 338);
+            textBoxCanciones.Size = new Size(250, 207);
             textBoxCanciones.TabIndex = 19;
             // 
             // buttonBuscarEnYouTube
             // 
-            buttonBuscarEnYouTube.Location = new Point(144, 434);
+            buttonBuscarEnYouTube.BackColor = SystemColors.GradientActiveCaption;
+            buttonBuscarEnYouTube.Location = new Point(57, 402);
             buttonBuscarEnYouTube.Name = "buttonBuscarEnYouTube";
-            buttonBuscarEnYouTube.Size = new Size(118, 73);
+            buttonBuscarEnYouTube.Size = new Size(118, 54);
             buttonBuscarEnYouTube.TabIndex = 20;
             buttonBuscarEnYouTube.Text = "Buscar en youtube";
-            buttonBuscarEnYouTube.UseVisualStyleBackColor = true;
+            buttonBuscarEnYouTube.UseVisualStyleBackColor = false;
             // 
             // panel1
             // 
             panel1.BackColor = Color.OrangeRed;
-            panel1.Controls.Add(buttonBuscarEnYouTube);
-            panel1.Controls.Add(textBoxCanciones);
-            panel1.Controls.Add(buttonVerVideo);
             panel1.Controls.Add(webViewVideo);
-            panel1.Controls.Add(textBoxEnlaceVideo);
             panel1.Location = new Point(944, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(594, 940);
             panel1.TabIndex = 21;
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(textBoxCanciones);
+            panel2.Controls.Add(Enlace);
+            panel2.Controls.Add(buttonBuscarEnYouTube);
+            panel2.Controls.Add(buttonVerVideo);
+            panel2.Controls.Add(buttonCerrar);
+            panel2.Controls.Add(textBoxEnlaceVideo);
+            panel2.Location = new Point(699, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(250, 914);
+            panel2.TabIndex = 22;
+            // 
+            // Enlace
+            // 
+            Enlace.AutoSize = true;
+            Enlace.Font = new Font("Showcard Gothic", 9F, FontStyle.Bold);
+            Enlace.Location = new Point(81, 312);
+            Enlace.Name = "Enlace";
+            Enlace.Size = new Size(80, 18);
+            Enlace.TabIndex = 23;
+            Enlace.Text = "Oración";
             // 
             // FormularioResumen
             // 
@@ -229,12 +256,12 @@
             BackColor = SystemColors.ControlDark;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1539, 952);
+            Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(textBoxOracion);
             Controls.Add(textBoxConsejo);
             Controls.Add(textBoxReflexion);
             Controls.Add(labelEmocion);
-            Controls.Add(buttonCerrar);
             Controls.Add(labelOracion);
             Controls.Add(labelConsejo);
             Controls.Add(labelReflexion);
@@ -245,7 +272,8 @@
             Text = "FormularioResumen";
             ((System.ComponentModel.ISupportInitialize)webViewVideo).EndInit();
             panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -269,5 +297,7 @@
         private TextBox textBoxCanciones;
         private Button buttonBuscarEnYouTube;
         private Panel panel1;
+        private Panel panel2;
+        private Label Enlace;
     }
 }

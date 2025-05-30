@@ -30,6 +30,23 @@ namespace EmDijes1.Forms
             webViewVideo.Dock = DockStyle.Fill;
         }
 
+        public FormularioResumen(ResumenUsuario resumen)
+        {
+            InitializeComponent();
+
+            labelEmocion.Text = $"Emoción detectada: {Capitalizar(resumen.Emocion)}";
+            textBoxVersiculo.Text = resumen.Versiculo;
+            textBoxReflexion.Text = resumen.Reflexion;
+            textBoxConsejo.Text = resumen.Consejo;
+            textBoxOracion.Text = resumen.Oracion;
+            textBoxCanciones.Text = resumen.Canciones;
+
+            buttonCerrar.Click += (_, __) => Close();
+            buttonVerVideo.Click += buttonVerVideo_Click;
+            buttonBuscarEnYouTube.Click += buttonBuscarEnYouTube_Click;
+            webViewVideo.Dock = DockStyle.Fill;
+        }
+
         private async Task GenerarResumenAsync()
         {
             labelEmocion.Text = $"Emoción detectada: {Capitalizar(emocion)}";
