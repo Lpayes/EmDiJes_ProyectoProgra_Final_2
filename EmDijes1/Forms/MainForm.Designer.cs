@@ -35,6 +35,9 @@
             buttonAnalizarEmocion = new Button();
             buttonHistorial = new Button();
             label1 = new Label();
+            textBoxEmocionManual = new TextBox();
+            label2 = new Label();
+            buttonUsarEmocionManual = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBoxCamara).BeginInit();
             SuspendLayout();
             // 
@@ -63,7 +66,7 @@
             buttonAbrirPreguntas.AccessibleRole = AccessibleRole.Sound;
             buttonAbrirPreguntas.BackColor = SystemColors.ControlDarkDark;
             buttonAbrirPreguntas.Font = new Font("Arial", 10.8F, FontStyle.Bold);
-            buttonAbrirPreguntas.Location = new Point(578, 598);
+            buttonAbrirPreguntas.Location = new Point(594, 598);
             buttonAbrirPreguntas.Name = "buttonAbrirPreguntas";
             buttonAbrirPreguntas.Size = new Size(136, 65);
             buttonAbrirPreguntas.TabIndex = 7;
@@ -87,7 +90,7 @@
             // 
             buttonHistorial.BackColor = SystemColors.ControlDarkDark;
             buttonHistorial.Font = new Font("Arial", 10.8F, FontStyle.Bold);
-            buttonHistorial.Location = new Point(419, 679);
+            buttonHistorial.Location = new Point(245, 669);
             buttonHistorial.Name = "buttonHistorial";
             buttonHistorial.Size = new Size(129, 88);
             buttonHistorial.TabIndex = 8;
@@ -97,7 +100,6 @@
             // 
             // label1
             // 
-            label1.AutoSize = true;
             label1.BackColor = SystemColors.MenuHighlight;
             label1.Font = new Font("Times New Roman", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.Location = new Point(331, 9);
@@ -105,6 +107,35 @@
             label1.Size = new Size(257, 68);
             label1.TabIndex = 9;
             label1.Text = "EmDiJes";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // textBoxEmocionManual
+            // 
+            textBoxEmocionManual.Location = new Point(412, 701);
+            textBoxEmocionManual.Name = "textBoxEmocionManual";
+            textBoxEmocionManual.Size = new Size(150, 27);
+            textBoxEmocionManual.TabIndex = 10;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(404, 669);
+            label2.Name = "label2";
+            label2.Size = new Size(184, 20);
+            label2.TabIndex = 11;
+            label2.Text = "Ingrese Su EmocionActual:";
+            // 
+            // buttonUsarEmocionManual
+            // 
+            buttonUsarEmocionManual.BackColor = SystemColors.ControlDarkDark;
+            buttonUsarEmocionManual.Font = new Font("Arial", 10.8F, FontStyle.Bold);
+            buttonUsarEmocionManual.Location = new Point(594, 681);
+            buttonUsarEmocionManual.Name = "buttonUsarEmocionManual";
+            buttonUsarEmocionManual.Size = new Size(136, 65);
+            buttonUsarEmocionManual.TabIndex = 12;
+            buttonUsarEmocionManual.Text = "Iniciar Camara";
+            buttonUsarEmocionManual.UseVisualStyleBackColor = false;
+            buttonUsarEmocionManual.Click += buttonUsarEmocionManual_Click_1;
             // 
             // MainForm
             // 
@@ -112,6 +143,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(967, 783);
+            Controls.Add(buttonUsarEmocionManual);
+            Controls.Add(label2);
+            Controls.Add(textBoxEmocionManual);
             Controls.Add(label1);
             Controls.Add(buttonHistorial);
             Controls.Add(buttonAbrirPreguntas);
@@ -133,5 +167,8 @@
         private Button buttonAnalizarEmocion;
         private Button buttonHistorial;
         private Label label1;
+        private TextBox textBoxEmocionManual;
+        private Label label2;
+        private Button buttonUsarEmocionManual;
     }
 }

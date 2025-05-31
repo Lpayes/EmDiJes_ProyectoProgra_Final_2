@@ -42,16 +42,18 @@
             labelPregunta.AutoSize = true;
             labelPregunta.BackColor = SystemColors.GrayText;
             labelPregunta.Font = new Font("Arial Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelPregunta.Location = new Point(329, 37);
+            labelPregunta.Location = new Point(343, 9);
+            labelPregunta.MaximumSize = new Size(400, 0);
             labelPregunta.Name = "labelPregunta";
             labelPregunta.Size = new Size(109, 28);
             labelPregunta.TabIndex = 0;
             labelPregunta.Text = "Pregunta";
             labelPregunta.TextAlign = ContentAlignment.MiddleCenter;
+            labelPregunta.Click += labelPregunta_Click;
             // 
             // textBoxRespuesta
             // 
-            textBoxRespuesta.Location = new Point(188, 81);
+            textBoxRespuesta.Location = new Point(200, 101);
             textBoxRespuesta.Multiline = true;
             textBoxRespuesta.Name = "textBoxRespuesta";
             textBoxRespuesta.Size = new Size(389, 143);
@@ -60,7 +62,7 @@
             // buttonSiguiente
             // 
             buttonSiguiente.BackColor = Color.Red;
-            buttonSiguiente.Location = new Point(268, 230);
+            buttonSiguiente.Location = new Point(264, 260);
             buttonSiguiente.Name = "buttonSiguiente";
             buttonSiguiente.Size = new Size(110, 48);
             buttonSiguiente.TabIndex = 2;
@@ -70,7 +72,7 @@
             // buttonCancelar
             // 
             buttonCancelar.BackColor = Color.Red;
-            buttonCancelar.Location = new Point(384, 230);
+            buttonCancelar.Location = new Point(380, 260);
             buttonCancelar.Name = "buttonCancelar";
             buttonCancelar.Size = new Size(110, 48);
             buttonCancelar.TabIndex = 3;

@@ -121,18 +121,56 @@ namespace EmDijes1
             }
         }
 
+        private void buttonUsarEmocionManual_Click(object sender, EventArgs e)
+        {
+            var emocionManual = textBoxEmocionManual.Text.Trim().ToLower();
 
+            // Normaliza la emoción para aceptar inglés o español
+            var emocionNormalizada = emocionManual switch
+            {
+                "happy" or "feliz" => "feliz",
+                "sad" or "triste" => "triste",
+                "angry" or "enojado" => "enojado",
+                "surprised" or "sorprendido" => "sorprendido",
+                "disgusted" or "disgustado" => "disgustado",
+                _ => "neutral"
+            };
+
+            using var frm = new FormularioPreguntas(emocionNormalizada);
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                var respuestas = frm.Respuestas;
+            }
+        }
 
 
         private async void buttonAbrirPreguntas_Click_1(object sender, EventArgs e)
         {
-            if (emocionDetectada == "neutral")
+            string emocionParaPreguntas;
+
+            if (!string.IsNullOrWhiteSpace(textBoxEmocionManual.Text))
             {
-                MessageBox.Show("⚠️ Analiza la emoción antes de continuar.");
+                var emocionManual = textBoxEmocionManual.Text.Trim().ToLower();
+                emocionParaPreguntas = emocionManual switch
+                {
+                    "happy" or "feliz" => "feliz",
+                    "sad" or "triste" => "triste",
+                    "angry" or "enojado" => "enojado",
+                    "surprised" or "sorprendido" => "sorprendido",
+                    "disgusted" or "disgustado" => "disgustado",
+                    _ => "neutral"
+                };
+            }
+            // Si no, usa la emoción detectada por la cámara
+            else if (emocionDetectada != "neutral")
+            {
+                emocionParaPreguntas = MapearEmocionAWS(emocionDetectada);
+            }
+            else
+            {
+                MessageBox.Show("⚠️ Analiza la emoción o ingresa una manual antes de continuar.");
                 return;
             }
-
-            var emocionParaPreguntas = MapearEmocionAWS(emocionDetectada);
 
             using var frm = new FormularioPreguntas(emocionParaPreguntas);
             if (frm.ShowDialog() == DialogResult.OK)
@@ -167,6 +205,28 @@ namespace EmDijes1
         {
             var historialForm = new HistorialForm();
             historialForm.ShowDialog();
+        }
+
+        private void buttonUsarEmocionManual_Click_1(object sender, EventArgs e)
+        {
+            var emocionManual = textBoxEmocionManual.Text.Trim().ToLower();
+
+            // Normaliza la emoción para aceptar inglés o español
+            var emocionNormalizada = emocionManual switch
+            {
+                "happy" or "feliz" => "feliz",
+                "sad" or "triste" => "triste",
+                "angry" or "enojado" => "enojado",
+                "surprised" or "sorprendido" => "sorprendido",
+                "disgusted" or "disgustado" => "disgustado",
+                _ => "neutral"
+            };
+
+            using var frm = new FormularioPreguntas(emocionNormalizada);
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                var respuestas = frm.Respuestas;
+            }
         }
     }
 }

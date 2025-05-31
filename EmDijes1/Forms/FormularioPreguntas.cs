@@ -38,6 +38,7 @@ namespace EmDijes1
 
             buttonCancelar.Click += (_, __) => DialogResult = DialogResult.Cancel;
             buttonSiguiente.Click += async (s, e) => await ButtonSiguiente_ClickAsync(s, e);
+
         }
 
         private void ConfigurarControles()
@@ -184,6 +185,11 @@ Responde de forma empática, espiritual y clara, en máximo 2 párrafos (puede s
                 case 5: if (Respuestas.GetType().GetProperty("Respuesta6") != null) Respuestas.GetType().GetProperty("Respuesta6").SetValue(Respuestas, respuesta); break;
                 case 6: if (Respuestas.GetType().GetProperty("Respuesta7") != null) Respuestas.GetType().GetProperty("Respuesta7").SetValue(Respuestas, respuesta); break;
             }
+        }
+
+        private void labelPregunta_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
