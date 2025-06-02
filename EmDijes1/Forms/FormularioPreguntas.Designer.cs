@@ -42,7 +42,7 @@
             labelPregunta.AutoSize = true;
             labelPregunta.BackColor = SystemColors.GrayText;
             labelPregunta.Font = new Font("Arial Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelPregunta.Location = new Point(343, 9);
+            labelPregunta.Location = new Point(223, 9);
             labelPregunta.MaximumSize = new Size(400, 0);
             labelPregunta.Name = "labelPregunta";
             labelPregunta.Size = new Size(109, 28);

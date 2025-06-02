@@ -5,7 +5,10 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-public class ServicioOpenAI
+namespace EmDijes1.Services
+{
+
+    public class ServicioOpenAI
 {
     private readonly HttpClient _httpClient;
     private readonly string _model;
@@ -46,4 +49,5 @@ public class ServicioOpenAI
 
         return mensaje;
     }
+}
 }

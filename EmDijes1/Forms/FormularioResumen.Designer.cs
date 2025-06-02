@@ -245,9 +245,9 @@
             Enlace.Font = new Font("Showcard Gothic", 9F, FontStyle.Bold);
             Enlace.Location = new Point(81, 312);
             Enlace.Name = "Enlace";
-            Enlace.Size = new Size(80, 18);
+            Enlace.Size = new Size(71, 18);
             Enlace.TabIndex = 23;
-            Enlace.Text = "Oración";
+            Enlace.Text = "Buscar";
             // 
             // FormularioResumen
             // 

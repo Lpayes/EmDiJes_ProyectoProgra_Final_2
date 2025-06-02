@@ -37,7 +37,6 @@
             label1 = new Label();
             textBoxEmocionManual = new TextBox();
             label2 = new Label();
-            buttonUsarEmocionManual = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBoxCamara).BeginInit();
             SuspendLayout();
             // 
@@ -125,25 +124,12 @@
             label2.TabIndex = 11;
             label2.Text = "Ingrese Su EmocionActual:";
             // 
-            // buttonUsarEmocionManual
-            // 
-            buttonUsarEmocionManual.BackColor = SystemColors.ControlDarkDark;
-            buttonUsarEmocionManual.Font = new Font("Arial", 10.8F, FontStyle.Bold);
-            buttonUsarEmocionManual.Location = new Point(594, 681);
-            buttonUsarEmocionManual.Name = "buttonUsarEmocionManual";
-            buttonUsarEmocionManual.Size = new Size(136, 65);
-            buttonUsarEmocionManual.TabIndex = 12;
-            buttonUsarEmocionManual.Text = "Iniciar Camara";
-            buttonUsarEmocionManual.UseVisualStyleBackColor = false;
-            buttonUsarEmocionManual.Click += buttonUsarEmocionManual_Click_1;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(967, 783);
-            Controls.Add(buttonUsarEmocionManual);
             Controls.Add(label2);
             Controls.Add(textBoxEmocionManual);
             Controls.Add(label1);
@@ -169,6 +155,5 @@
         private Label label1;
         private TextBox textBoxEmocionManual;
         private Label label2;
-        private Button buttonUsarEmocionManual;
     }
 }

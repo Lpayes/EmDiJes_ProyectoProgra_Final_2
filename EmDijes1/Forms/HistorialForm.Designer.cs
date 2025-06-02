@@ -40,6 +40,7 @@
             label3 = new Label();
             label4 = new Label();
             buttonVerResumen2 = new Button();
+            panelGrafica = new Panel();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -149,13 +150,22 @@
             buttonVerResumen2.UseVisualStyleBackColor = false;
             buttonVerResumen2.Click += buttonVerResumen2_Click;
             // 
+            // panelGrafica
+            // 
+            panelGrafica.Location = new Point(661, 57);
+            panelGrafica.Name = "panelGrafica";
+            panelGrafica.Size = new Size(403, 506);
+            panelGrafica.TabIndex = 12;
+            panelGrafica.Paint += panelGrafica_Paint;
+            // 
             // HistorialForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(810, 450);
+            ClientSize = new Size(1124, 625);
+            Controls.Add(panelGrafica);
             Controls.Add(buttonVerResumen2);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -167,6 +177,7 @@
             Controls.Add(textBoxId);
             Controls.Add(dataGridView1);
             Controls.Add(dateTimePicker1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "HistorialForm";
             Text = "HistorialForm";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
@@ -187,5 +198,6 @@
         private Label label3;
         private Label label4;
         private Button buttonVerResumen2;
+        private Panel panelGrafica;
     }
 }

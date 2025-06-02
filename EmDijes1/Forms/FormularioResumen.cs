@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using EmDijes1.Models;
 using EmDijes1.Services;
+using EmDijes1.Utils;
 
 namespace EmDijes1.Forms
 {
@@ -50,7 +51,6 @@ namespace EmDijes1.Forms
         private async Task GenerarResumenAsync()
         {
             labelEmocion.Text = $"Emoción detectada: {Capitalizar(emocion)}";
-
             DeshabilitarControles();
 
             string prompt = ConstruirPromptResumen(respuestas, emocion);
@@ -58,14 +58,12 @@ namespace EmDijes1.Forms
             try
             {
                 string respuestaIA = await servicioOpenAI.ObtenerRespuestaAsync(prompt);
-
                 ProcesarRespuestaIA(respuestaIA);
 
-                // GUARDAR EN LA BASE DE DATOS AQUÍ
                 var resumen = new ResumenUsuario
                 {
                     FechaRegistro = DateTime.Now,
-                    Emocion = emocion,
+                    Emocion = string.IsNullOrWhiteSpace(emocion) ? "desconocido" : emocion,
                     Versiculo = textBoxVersiculo.Text,
                     Reflexion = textBoxReflexion.Text,
                     Consejo = textBoxConsejo.Text,
@@ -75,10 +73,7 @@ namespace EmDijes1.Forms
 
                 string connectionString = DatabaseService.ObtenerConnectionString();
                 var dbService = new DatabaseService(connectionString);
-                dbService.GuardarResumen(resumen);
-
-                // Si quieres guardar también las respuestas individuales:
-                // dbService.GuardarRespuestasUsuario(respuestas);
+                await dbService.GuardarResumenAsync(resumen);
             }
             catch (Exception ex)
             {
@@ -116,21 +111,11 @@ namespace EmDijes1.Forms
 
         private string ConstruirPromptResumen(RespuestasUsuario r, string emocion)
         {
-            string emocionNormalizada = emocion.ToLowerInvariant() switch
-            {
-                "happy" => "feliz",
-                "sad" => "triste",
-                "angry" => "enojado",
-                "surprised" => "sorprendido",
-                "disgusted" => "disgustado",
-                _ => emocion.ToLowerInvariant()
-            };
+            string emocionNormalizada = EmocionHelper.MapearEmocion(emocion);
+            string[] preguntas = EmocionHelper.ObtenerPreguntasSegunEmocion(emocionNormalizada);
 
-            string[] preguntas = ObtenerPreguntasSegunEmocion(emocionNormalizada);
-
-            // Historial dinámico de preguntas y respuestas
             string historial = "";
-            for (int i = 0; i < 7; i++) // Solo 7 preguntas/respuestas
+            for (int i = 0; i < 7; i++)
             {
                 var prop = r.GetType().GetProperty($"Respuesta{i + 1}");
                 string respuesta = prop != null ? prop.GetValue(r)?.ToString() ?? "" : "";
@@ -146,73 +131,6 @@ namespace EmDijes1.Forms
                 "**Consejo:**\n(Brinda un consejo cristiano, práctico y espiritual, personalizado según las respuestas. Si el usuario dice que no está cerca de Dios, anímale a buscarle y explícale cómo puede hacerlo.)\n\n" +
                 "**Oración:**\n(Escribe una oración personalizada y extensa, de al menos 8 líneas, pidiendo a Dios consuelo, fortaleza, guía y cercanía para el usuario, mencionando detalles relevantes de sus respuestas. Sé cálido y profundo.)\n\n" +
                 "**Canciones recomendadas:**\n(Escribe una lista de 6 canciones cristianas adecuadas para la emoción del usuario, cada una con su nombre y un enlace directo a YouTube. Ejemplo: 1. Nombre - https://...)\n\n";
-        }
-
-        private string[] ObtenerPreguntasSegunEmocion(string emocion)
-        {
-            return emocion switch
-            {
-                "feliz" => new[]
-                {
-                    "¿Por qué te sientes feliz hoy?",
-                    "¿Qué situación o persona ha influido más en tu felicidad?",
-                    "¿Has agradecido a Dios por este momento de alegría?",
-                    "¿Cómo describirías tu paz interior en este momento?",
-                    "¿Con quién te gustaría compartir tu felicidad?",
-                    "¿Qué te ayuda a mantenerte positivo y animado?",
-                    "¿Sientes que tu relación con Dios fortalece tu alegría? ¿Por qué?"
-                },
-                "triste" => new[]
-                {
-                    "¿Qué te ha hecho sentir triste hoy?",
-                    "¿Hay alguien con quien puedas hablar sobre cómo te sientes?",
-                    "¿Qué te ayudaría a sentirte un poco mejor en este momento?",
-                    "¿Sientes que tienes paz interior a pesar de la tristeza?",
-                    "¿Has buscado apoyo en Dios o en personas cercanas?",
-                    "¿Qué cosas te han ayudado antes a superar momentos difíciles?",
-                    "¿Sientes que tu relación con Dios te da consuelo en la tristeza?"
-                },
-                "enojado" => new[]
-                {
-                    "¿Qué situación te ha provocado enojo?",
-                    "¿Cómo sueles manejar el enojo en tu vida diaria?",
-                    "¿Hay alguien con quien puedas hablar para desahogarte?",
-                    "¿Qué te ayudaría a encontrar paz en este momento?",
-                    "¿Has intentado buscar calma o apoyo en Dios?",
-                    "¿Qué actividades te ayudan a liberar el enojo de forma saludable?",
-                    "¿Sientes que tu relación con Dios te ayuda a controlar el enojo?"
-                },
-                "sorprendido" => new[]
-                {
-                    "¿Qué te ha sorprendido recientemente?",
-                    "¿Cómo te sentiste al recibir esa sorpresa?",
-                    "¿Crees que esta sorpresa ha cambiado tu estado de ánimo?",
-                    "¿Has compartido esta experiencia con alguien cercano?",
-                    "¿Sientes que Dios tiene un propósito en lo inesperado?",
-                    "¿Qué te ayuda a adaptarte a los cambios inesperados?",
-                    "¿Cómo influye tu relación con Dios cuando enfrentas sorpresas?"
-                },
-                "disgustado" => new[]
-                {
-                    "¿Por qué te sientes disgustado hoy?",
-                    "¿Qué situación o persona ha generado este disgusto?",
-                    "¿Cómo te afecta emocionalmente este disgusto?",
-                    "¿Qué te ayudaría a sentirte mejor ahora?",
-                    "¿Has buscado apoyo en Dios o en alguien de confianza?",
-                    "¿Qué estrategias usas para recuperar la paz interior?",
-                    "¿Sientes que tu relación con Dios te ayuda a superar el disgusto?"
-                },
-                _ => new[]
-                {
-                    "¿Cómo te sientes hoy y qué palabra describe mejor tu estado de ánimo?",
-                    "¿Qué situación o persona ha influido más en cómo te sientes ahora?",
-                    "¿Sientes que tienes paz interior en este momento? ¿Por qué?",
-                    "¿Hay algo que te gustaría cambiar o mejorar en tu vida emocional o espiritual?",
-                    "¿A quién puedes acudir cuando necesitas apoyo o ánimo?",
-                    "¿Qué cosas te ayudan a sentirte mejor cuando enfrentas momentos difíciles?",
-                    "¿Sientes que tu relación con Dios te da fortaleza o consuelo? ¿Por qué?"
-                }
-            };
         }
 
         private string Capitalizar(string texto)

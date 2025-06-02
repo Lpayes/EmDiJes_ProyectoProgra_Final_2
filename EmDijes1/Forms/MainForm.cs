@@ -8,8 +8,10 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using EmDijes1.Utils; 
 
 using DrawingImage = System.Drawing.Image;
+using EmDijes1.Forms;
 
 namespace EmDijes1
 {
@@ -107,7 +109,7 @@ namespace EmDijes1
 
                 if (top != null)
                 {
-                    MessageBox.Show($"😀 Emoción: {MapearEmocionAWS(emocionDetectada)} ({top.Confidence * 100:F2}%)");
+                    MessageBox.Show($" Emoción: {EmocionHelper.MapearEmocion(emocionDetectada)} ({top.Confidence * 100:F2}%)");
                 }
                 else
                 {
@@ -117,32 +119,9 @@ namespace EmDijes1
             catch (Exception ex)
             {
                 emocionDetectada = "neutral";
-                MessageBox.Show("❌ Error al analizar: " + ex.Message);
+                MessageBox.Show(" Error al analizar: " + ex.Message);
             }
         }
-
-        private void buttonUsarEmocionManual_Click(object sender, EventArgs e)
-        {
-            var emocionManual = textBoxEmocionManual.Text.Trim().ToLower();
-
-            // Normaliza la emoción para aceptar inglés o español
-            var emocionNormalizada = emocionManual switch
-            {
-                "happy" or "feliz" => "feliz",
-                "sad" or "triste" => "triste",
-                "angry" or "enojado" => "enojado",
-                "surprised" or "sorprendido" => "sorprendido",
-                "disgusted" or "disgustado" => "disgustado",
-                _ => "neutral"
-            };
-
-            using var frm = new FormularioPreguntas(emocionNormalizada);
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                var respuestas = frm.Respuestas;
-            }
-        }
-
 
         private async void buttonAbrirPreguntas_Click_1(object sender, EventArgs e)
         {
@@ -151,24 +130,16 @@ namespace EmDijes1
             if (!string.IsNullOrWhiteSpace(textBoxEmocionManual.Text))
             {
                 var emocionManual = textBoxEmocionManual.Text.Trim().ToLower();
-                emocionParaPreguntas = emocionManual switch
-                {
-                    "happy" or "feliz" => "feliz",
-                    "sad" or "triste" => "triste",
-                    "angry" or "enojado" => "enojado",
-                    "surprised" or "sorprendido" => "sorprendido",
-                    "disgusted" or "disgustado" => "disgustado",
-                    _ => "neutral"
-                };
+                emocionParaPreguntas = EmocionHelper.MapearEmocion(emocionManual);
             }
             // Si no, usa la emoción detectada por la cámara
             else if (emocionDetectada != "neutral")
             {
-                emocionParaPreguntas = MapearEmocionAWS(emocionDetectada);
+                emocionParaPreguntas = EmocionHelper.MapearEmocion(emocionDetectada);
             }
             else
             {
-                MessageBox.Show("⚠️ Analiza la emoción o ingresa una manual antes de continuar.");
+                MessageBox.Show(" Analiza la emoción o ingresa una manual antes de continuar.");
                 return;
             }
 
@@ -179,18 +150,7 @@ namespace EmDijes1
             }
         }
 
-        private string MapearEmocionAWS(string emocionAWS)
-        {
-            return emocionAWS switch
-            {
-                "happy" => "feliz",
-                "sad" => "triste",
-                "angry" => "enojado",
-                "surprised" => "sorprendido",
-                "disgusted" => "disgustado",
-                _ => "neutral"
-            };
-        }
+        
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -207,26 +167,5 @@ namespace EmDijes1
             historialForm.ShowDialog();
         }
 
-        private void buttonUsarEmocionManual_Click_1(object sender, EventArgs e)
-        {
-            var emocionManual = textBoxEmocionManual.Text.Trim().ToLower();
-
-            // Normaliza la emoción para aceptar inglés o español
-            var emocionNormalizada = emocionManual switch
-            {
-                "happy" or "feliz" => "feliz",
-                "sad" or "triste" => "triste",
-                "angry" or "enojado" => "enojado",
-                "surprised" or "sorprendido" => "sorprendido",
-                "disgusted" or "disgustado" => "disgustado",
-                _ => "neutral"
-            };
-
-            using var frm = new FormularioPreguntas(emocionNormalizada);
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                var respuestas = frm.Respuestas;
-            }
-        }
     }
 }
